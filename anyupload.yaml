@@ -1,0 +1,58 @@
+# 参数application，应用的注册名，要求唯一，暂不支持修改
+application: "Anyupload_0"
+# 参数protocol，应用层协议，暂不支持修改
+protocol: "http"
+# 参数host，该低交互服务监听的地址，暂不支持修改
+host: "0.0.0.0"
+# 参数port，该低交互服务监听的端口
+port: 82
+# 参数enable，该低交互是否启用，设置为false则是关闭该服务，暂不支持修改
+enable: true
+# 参数proto，该低交互的传输层协议，暂不支持修改
+proto: tcp
+
+# 可选字段，暂不支持修改
+version: "Anyupload_0"
+
+
+# 占位参数配置
+simulator:
+    Param:
+    - uuid: myurl
+      type: url
+    - uuid: mymethod
+      type: method
+    resConfig:
+    - conditions:
+      - value: /cgi-bin/rpc
+        paramuuid: myurl
+        compare: regexp
+      - value: GET
+        paramuuid: mymethod
+        compare: =
+      union: and
+      response:
+        type: json   # 普通字符串返回
+        value: '{"Code1":0,"Enabled":"1","Code":0,"VerifyString": "9VIoJqZNnRo0eCnhJ6xg7U4j0uU16YRP"}'
+      prioity: 0
+      status: True
+    - conditions:
+      - value: /test
+        paramuuid: myurl
+        compare: =
+      - value: POST
+        paramuuid: mymethod
+        compare: =
+      union: and
+      response:
+        type: string   # 普通字符串返回
+        value: hello
+        threat: "异常访问"
+      prioity: 0
+      status: True
+
+
+# 占位参数配置
+record:
+    -
+
